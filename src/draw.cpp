@@ -32,7 +32,7 @@ void Draw::draw() {
             float r = rand_col(mt);
             float g = rand_col(mt);
             float b = rand_col(mt);
-            int rad = 2;
+            int rad = 1;
             circles.push_back(Circle(x, y, rad, Color(r,g,b)));
         }  
 

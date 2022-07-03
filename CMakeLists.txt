@@ -12,7 +12,9 @@ add_definitions(-DNANOVG_USE_GLEW)
 
 find_package(glfw3 REQUIRED CONFIG)
 find_package(OpenGL REQUIRED)
-find_package(GLEW REQUIRED)
+#find_package(GLEW REQUIRED)
+
+#message(STATUS ${OPENGL_INCLUDE_DIR})
 
 include_directories(
     ${OPENGL_INCLUDE_DIR}
@@ -39,5 +41,6 @@ set(SOURCES
 
 #set_property(TARGET nanovg PROPERTY CXX_STANDARD 17)
 add_executable(nanovg src/main.cpp ${SOURCES} )
-target_link_libraries(nanovg OpenGL::GL GLEW::GLEW glfw ${CMAKE_DL_LIBS})
+#target_link_libraries(nanovg OpenGL::GL GLEW::GLEW glfw ${CMAKE_DL_LIBS})
+target_link_libraries(nanovg OpenGL::GL glfw ${CMAKE_DL_LIBS} ${CMAKE_SOURCE_DIR}/lib/libglew32.dll.a)
 target_compile_features(nanovg PUBLIC cxx_std_17)

@@ -77,7 +77,7 @@ void renderPattern(NVGcontext* vg, NVGLUframebuffer* fb, float t, float pxRatio)
 
 int loadFonts(NVGcontext* vg)
 {
-	printf("current path: %s\n", std::filesystem::current_path().c_str());
+	//printf("current path: %s\n", std::filesystem::current_path().c_str());
 	
 
 	int font;
@@ -184,7 +184,7 @@ int main()
 		return -1;
 	}
 
-	glfwSwapInterval(0);
+	glfwSwapInterval(1);
 
 	initGPUTimer(&gpuTimer);
 

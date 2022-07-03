@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "make build",
+			"command": "make -j2",
+			"options": {
+				"cwd": "${workspaceFolder}/build"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"detail": "make build"
+		}
+	]
+}

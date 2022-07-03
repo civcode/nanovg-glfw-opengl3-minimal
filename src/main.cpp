@@ -17,20 +17,23 @@
 //
 
 #include <cmath>
-
+#include <filesystem>
 #include <stdio.h>
-#ifdef NANOVG_GLEW
-#	include <GL/glew.h>
-#endif
+
+
 #ifdef __APPLE__
-#	define GLFW_INCLUDE_GLCOREARB
+#  define GLFW_INCLUDE_GLCOREARB
 #endif
+
 #include <GLFW/glfw3.h>
+
 #include "nanovg.h"
-#define NANOVG_GL3_IMPLEMENTATION
 #include "nanovg_gl.h"
 #include "nanovg_gl_utils.h"
 #include "perf.h"
+
+#include "shape.h"
+#include "draw.h"
 
 void renderPattern(NVGcontext* vg, NVGLUframebuffer* fb, float t, float pxRatio)
 {
@@ -74,6 +77,9 @@ void renderPattern(NVGcontext* vg, NVGLUframebuffer* fb, float t, float pxRatio)
 
 int loadFonts(NVGcontext* vg)
 {
+	printf("current path: %s\n", std::filesystem::current_path().c_str());
+	
+
 	int font;
 	//font = nvgCreateFont(vg, "sans", "../example/Roboto-Regular.ttf");
 	font = nvgCreateFont(vg, "sans", "../dep/nanovg/example/Roboto-Regular.ttf");
@@ -100,6 +106,9 @@ static void key(GLFWwindow* window, int key, int scancode, int action, int mods)
 	NVG_NOTUSED(scancode);
 	NVG_NOTUSED(mods);
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
+
+	if (key == GLFW_KEY_Q && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
@@ -136,7 +145,7 @@ int main()
 #ifdef DEMO_MSAA
 	glfwWindowHint(GLFW_SAMPLES, 4);
 #endif
-	window = glfwCreateWindow(600, 600, "NanoVG", NULL, NULL);
+	window = glfwCreateWindow(640, 480, "NanoVG", NULL, NULL);
 //	window = glfwCreateWindow(1000, 600, "NanoVG", glfwGetPrimaryMonitor(), NULL);
 	if (!window) {
 		glfwTerminate();
@@ -146,15 +155,6 @@ int main()
 	glfwSetKeyCallback(window, key);
 
 	glfwMakeContextCurrent(window);
-#ifdef NANOVG_GLEW
-	glewExperimental = GL_TRUE;
-	if(glewInit() != GLEW_OK) {
-		printf("Could not init glew.\n");
-		return -1;
-	}
-	// GLEW generates GL error because it calls glGetString(GL_EXTENSIONS), we'll consume it here.
-	glGetError();
-#endif
 
 #ifdef DEMO_MSAA
 	vg = nvgCreateGL3(NVG_STENCIL_STROKES | NVG_DEBUG);
@@ -191,6 +191,12 @@ int main()
 	glfwSetTime(0);
 	prevt = glfwGetTime();
 
+	//Shape::set_nvgContext(vg);
+	//Circle c(50, 50, 20, Color(0,1,0));
+	
+	//Draw d;
+	Draw::set_nvgContext(vg);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		double mx, my, t, dt;
@@ -209,7 +215,7 @@ int main()
 		// Calculate pixel ration for hi-dpi devices.
 		pxRatio = (float)fbWidth / (float)winWidth;
 
-		renderPattern(vg, fb, t, pxRatio);
+		//renderPattern(vg, fb, t, pxRatio);
 
 		// Update and render
 		glViewport(0, 0, fbWidth, fbHeight);
@@ -219,6 +225,7 @@ int main()
 		nvgBeginFrame(vg, winWidth, winHeight, pxRatio);
 
 		// Use the FBO as image pattern.
+		/*
 		if (fb != NULL) {
 			NVGpaint img = nvgImagePattern(vg, 0, 0, 100, 100, 0, fb->image, 1.0f);
 			nvgSave(vg);
@@ -240,6 +247,17 @@ int main()
 
 			nvgRestore(vg);
 		}
+		*/
+
+		nvgSave(vg);
+		nvgTranslate(vg, 0, 50);
+		//c.render();
+		//static int x = 0;
+		//c.set_position(x++%200, 50);
+		Draw::draw();
+
+		nvgRestore(vg);
+
 
 		renderGraph(vg, 5,5, &fps);
 		renderGraph(vg, 5+200+5,5, &cpuGraph);

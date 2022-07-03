@@ -42,5 +42,6 @@ set(SOURCES
 #set_property(TARGET nanovg PROPERTY CXX_STANDARD 17)
 add_executable(nanovg src/main.cpp ${SOURCES} )
 #target_link_libraries(nanovg OpenGL::GL GLEW::GLEW glfw ${CMAKE_DL_LIBS})
-target_link_libraries(nanovg OpenGL::GL glfw ${CMAKE_DL_LIBS} ${CMAKE_SOURCE_DIR}/lib/libglew32.dll.a)
+#target_link_libraries(nanovg OpenGL::GL glfw ${CMAKE_DL_LIBS} ${CMAKE_SOURCE_DIR}/lib/libglew32.dll.a)
+target_link_libraries(nanovg OpenGL::GL glfw ${CMAKE_DL_LIBS} glew32)
 target_compile_features(nanovg PUBLIC cxx_std_17)

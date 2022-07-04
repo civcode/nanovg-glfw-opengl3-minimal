@@ -27,7 +27,10 @@ include_directories(
 )
 
 file(GLOB nanovg_SRC
-    ${PROJECT_SOURCE_DIR}/dep/nanovg/src/*.c
+    #${PROJECT_SOURCE_DIR}/dep/nanovg/src/*.c
+    ${PROJECT_SOURCE_DIR}/dep/nanovg/src/nanovg.c
+    ${PROJECT_SOURCE_DIR}/dep/nanovg/src/nanovg_gl.c
+    ${PROJECT_SOURCE_DIR}/dep/nanovg/src/nanovg_gl_utils.c
     ${PROJECT_SOURCE_DIR}/dep/nanovg/example/perf.c
     ${PROJECT_SOURCE_DIR}/dep/nanovg/example/demo.c
 )

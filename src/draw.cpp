@@ -18,7 +18,7 @@ void Draw::set_nvgContext(NVGcontext *ctx) {
 
 void Draw::draw() {
 
-    static int n = 1000;
+    static int n = 10000;
     static vector<Circle> circles;
 
     std::random_device rd;
@@ -53,6 +53,8 @@ void Draw::draw() {
             circles.begin(),
             circles.end(),
             [&](auto &&item) {
+                std::random_device rd;
+                std::mt19937 mt(rd());
                 std::uniform_int_distribution<int> delta(-1, 1);
                 int dx = delta(mt);
                 int dy = delta(mt);

@@ -5,6 +5,10 @@ project(nanovg)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fmax-errors=5")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wfatal-errors -fmax-errors=5")
 
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+
 add_definitions(-DNANOVG_GL3)
 add_definitions(-DNANOVG_USE_GLEW)
 #add_definitions(-DDEMO_MSAA)

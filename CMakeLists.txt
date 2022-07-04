@@ -22,6 +22,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/dep/nanovg/src
     ${PROJECT_SOURCE_DIR}/dep/nanovg/example
     ${PROJECT_SOURCE_DIR}/dep
+    ${PROJECT_SOURCE_DIR}/dep/glew-2.1.0/include
     ${PROJECT_SOURCE_DIR}/include
 )
 

@@ -42,7 +42,7 @@ set(SOURCES
 )
 
 
-file(COPY ${CMAKE_SOURCE_DIR}/bin/glew32.dll DESTINATION ${CMAKE_SOURCE_DIR}/build)
+file(COPY ${CMAKE_SOURCE_DIR}/dep/glew-2.1.0/lib/glew32.dll DESTINATION ${CMAKE_SOURCE_DIR}/build)
 
 add_executable(nanovg src/main.cpp ${SOURCES} )
 #target_link_libraries(nanovg OpenGL::GL glfw ${CMAKE_DL_LIBS} glew32)
